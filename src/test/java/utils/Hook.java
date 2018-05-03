@@ -3,40 +3,35 @@ package utils;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @Component
 public class Hook {
-    @Autowired
-    Attachments attachments;
 
     @Before
     public void configureSetUp(){
         baseUrl = "https://google.com/";
     }
 
+
     @After
-    public void afterScenario(Scenario scenario) throws IOException {
-
+    public void tearDown(Scenario scenario){
         if (scenario.isFailed()) {
-            System.out.println("Scenario: " + scenario.getName() + " failed");
-            attachments.takeScreenShot();
-            attachments.attachSnapshotToReport();
-        } else {
-            System.out.println("Scenario: " + scenario.getName() + " passed");
+            makeScreenshot(scenario.getStatus());
+            getWebDriver().quit();
         }
-
     }
 
-    @Before()
-    public void beforeScenario(Scenario scenario) throws IOException {
-        System.out.println("Scenario: " + scenario.getName() + " started");
+    @Attachment(value = "Page screenshot - {0}", type = "image/png")
+    private byte[] makeScreenshot(String method) {
+        return (((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES));
     }
+
 
 }

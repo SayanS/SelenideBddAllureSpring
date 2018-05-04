@@ -11,6 +11,6 @@ public class SearchResultsPage {
     By RESULTS_CONTAINERS_TITLES=By.xpath("//h3/a");
 
     public void ensureThatResultsContains(String expectedText){
-        $$(RESULTS_CONTAINERS_TITLES).stream().forEach(title-> title.is(text(expectedText)));
+        $$(RESULTS_CONTAINERS_TITLES).stream().forEach(title-> title.should(text(expectedText)));
     }
 }

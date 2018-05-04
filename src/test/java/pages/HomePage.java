@@ -29,7 +29,7 @@ public class HomePage {
     public void ensureThatGlobalSearchDropDownValuesStartsWith(String expectedText) {
         $$(GLOBAL_SEARCH_DROP_DOWN_VALUES).get(0).waitUntil(visible,5000);
         $$(GLOBAL_SEARCH_DROP_DOWN_VALUES).stream().forEach(element->{
-                element.is(text("sssss"));
+                element.should(text(expectedText));
                 System.out.println(element.getText());
         });
 

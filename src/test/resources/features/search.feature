@@ -14,7 +14,7 @@ Feature: Search functionality
     Scenario: Check Global Search functionality
       When Enter "Aimprosoft" into Global search field
       When Click on Global Search button
-      Then Search results should contain "Aimprosoft"
+      Then Search results should contain "MMMMMM"
 
 
 

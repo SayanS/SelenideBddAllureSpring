@@ -147,6 +147,7 @@
                 </dependencies>
             </plugin>
 
+            <!--Needed for mvn allure:report-->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -157,20 +158,21 @@
                 </configuration>
             </plugin>
 
-            <!--Needed for Jenkins localhost:8080 to show the report-->
-            <!--<plugin>-->
-                <!--<groupId>org.eclipse.jetty</groupId>-->
-                <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<version>9.2.10.v20150310</version>-->
-                <!--<configuration>-->
-                    <!--<webAppSourceDirectory>${project.build.directory}/target/site</webAppSourceDirectory>-->
-                    <!--<stopKey>stop</stopKey>-->
-                    <!--<stopPort>1234</stopPort>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <!--Needed for Jenkins-->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.10.v20150310</version>
+                <configuration>
+                    <webAppSourceDirectory>${project.build.directory}/target/site</webAppSourceDirectory>
+                    <stopKey>stop</stopKey>
+                    <stopPort>1234</stopPort>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
+    <!--Needed for mvn cite-->
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
